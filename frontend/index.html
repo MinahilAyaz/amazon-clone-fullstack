@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone | Homepage</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Utility Bar -->
+    <nav class="navbar-top">
+        <a href="index.html" class="navbar-logo">amazon<span>.clone</span></a>
+        
+        <form class="navbar-search" id="search-form">
+            <select class="search-select">
+                <option>All Departments</option>
+                <option>Electronics</option>
+                <option>Computers</option>
+                <option>Smart Home</option>
+                <option>Arts & Crafts</option>
+            </select>
+            <input type="text" class="search-input" placeholder="Search Amazon" id="search-query">
+            <button type="submit" class="search-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+        </form>
+
+        <div class="navbar-links">
+            <a href="login.html" class="nav-link">
+                <span class="line-1">Hello, sign in</span>
+                <span class="line-2">Account & Lists</span>
+            </a>
+            <a href="dashboard.html" class="nav-link">
+                <span class="line-1">Returns</span>
+                <span class="line-2">& Orders</span>
+            </a>
+            <a href="cart.html" class="nav-link" style="position: relative;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span id="cart-count" style="position: absolute; top: -5px; right: -10px; background: var(--color-primary); color: black; border-radius: 50%; padding: 2px 6px; font-size: 0.75rem; font-weight: bold;">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Secondary Nav Bar -->
+    <div class="navbar-secondary">
+        <a href="#" style="display: flex; align-items: center; gap: 5px; font-weight: bold;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            All
+        </a>
+        <a href="#">Today's Deals</a>
+        <a href="#">Customer Service</a>
+        <a href="#">Registry</a>
+        <a href="#">Gift Cards</a>
+        <a href="#">Sell</a>
+        <div style="flex: 1;"></div>
+        <a href="#" style="font-weight: bold;">Shop deals in Electronics</a>
+    </div>
+
+    <!-- Hero Banner Carousel -->
+    <section class="hero">
+        <div class="hero-carousel" id="hero-carousel">
+            <!-- Slide 1 -->
+            <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), transparent), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1500');">
+                <div class="hero-content">
+                    <h1>Upgrade Your Gaming Setup</h1>
+                    <button class="btn-primary">Shop Now</button>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), transparent), url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&q=80&w=1500');">
+                <div class="hero-content">
+                    <h1>Deals on Electronics</h1>
+                    <button class="btn-primary">See All Offers</button>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), transparent), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1500');">
+                <div class="hero-content">
+                    <h1>New Arrivals in Fashion</h1>
+                    <button class="btn-primary">Discover More</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-controls">
+            <button class="carousel-btn" id="prev-slide">&#10094;</button>
+            <button class="carousel-btn" id="next-slide">&#10095;</button>
+        </div>
+
+        <div class="carousel-dots" id="carousel-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Category Grid -->
+        <section class="category-grid">
+            <div class="category-card">
+                <h2>Electronics</h2>
+                <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&q=80&w=500" alt="Electronics">
+                <a href="#">Shop now</a>
+            </div>
+            <div class="category-card">
+                <h2>Home Decor</h2>
+                <img src="https://images.unsplash.com/photo-1513519245088-0e12902e35a6?auto=format&fit=crop&q=80&w=500" alt="Home Decor">
+                <a href="#">Shop now</a>
+            </div>
+            <div class="category-card">
+                <h2>Fashion</h2>
+                <img src="https://images.unsplash.com/photo-1445205170230-053b830c6050?auto=format&fit=crop&q=80&w=500" alt="Fashion">
+                <a href="#">Shop now</a>
+            </div>
+            <div class="category-card">
+                <h2>Smart Home</h2>
+                <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=500" alt="Smart Home">
+                <a href="#">Shop now</a>
+            </div>
+            <div class="category-card">
+                <h2>Books</h2>
+                <img src="https://images.unsplash.com/photo-1524578271613-d550eebad500?auto=format&fit=crop&q=80&w=500" alt="Books">
+                <a href="#">Shop now</a>
+            </div>
+            <div class="category-card">
+                <h2>Kitchen</h2>
+                <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=500" alt="Kitchen">
+                <a href="#">Shop now</a>
+            </div>
+        </section>
+
+        <!-- Today's Deals Section -->
+        <section style="margin-bottom: var(--space-2xl);">
+            <div style="display: flex; align-items: center; gap: var(--space-lg); margin-bottom: var(--space-md);">
+                <h2 style="font-size: 1.5rem;">Today's Deals</h2>
+                <a href="#">See all deals</a>
+            </div>
+            <div style="display: flex; gap: var(--space-lg); overflow-x: auto; padding-bottom: var(--space-md);">
+                <!-- Deal 1 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=200" alt="Headphones">
+                    <span class="badge badge--error">30% Off</span>
+                    <span class="price">$199.00</span>
+                    <span class="old-price">$285.00</span>
+                    <button class="btn-primary" style="padding: var(--space-xs); font-size: 0.875rem;">Add to Cart</button>
+                </div>
+                <!-- Deal 2 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=200" alt="Watch">
+                    <span class="badge badge--error">15% Off</span>
+                    <span class="price">$85.00</span>
+                    <span class="old-price">$100.00</span>
+                    <button class="btn-primary" style="padding: var(--space-xs); font-size: 0.875rem;">Add to Cart</button>
+                </div>
+                <!-- Deal 3 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=200" alt="Shoes">
+                    <span class="badge badge--error">20% Off</span>
+                    <span class="price">$120.00</span>
+                    <span class="old-price">$150.00</span>
+                    <button class="btn-primary" style="padding: var(--space-xs); font-size: 0.875rem;">Add to Cart</button>
+                </div>
+                <!-- Deal 4 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd9929a339e?auto=format&fit=crop&q=80&w=200" alt="Gadget">
+                    <span class="badge badge--error">10% Off</span>
+                    <span class="price">$45.00</span>
+                    <span class="old-price">$50.00</span>
+                    <button class="btn-primary" style="padding: var(--space-xs); font-size: 0.875rem;">Add to Cart</button>
+                </div>
+                <!-- Deal 5 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&q=80&w=200" alt="Chair">
+                    <span class="badge badge--error">25% Off</span>
+                    <span class="price">$220.00</span>
+                    <span class="old-price">$295.00</span>
+                    <button class="btn-primary" style="padding: var(--space-xs); font-size: 0.875rem;">Add to Cart</button>
+                </div>
+                <!-- Deal 6 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&q=80&w=200" alt="Sneakers">
+                    <span class="badge badge--error">50% Off</span>
+                    <span class="price">$60.00</span>
+                    <span class="old-price">$120.00</span>
+                    <button class="btn-primary" style="padding: var(--space-xs); font-size: 0.875rem;">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prime Strip -->
+        <section style="background-color: var(--color-secondary-light); color: white; padding: var(--space-xl); text-align: center; border-radius: var(--radius-md); margin-bottom: var(--space-2xl);">
+            <h2 style="margin-bottom: var(--space-md);">Experience the best of shopping and entertainment with Prime</h2>
+            <button class="btn-primary" style="background-color: white; color: black;">Try Prime for FREE</button>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <button class="back-to-top" id="back-to-top">Back to top</button>
+        <div class="footer-links">
+            <div class="footer-column">
+                <h3>Get to Know Us</h3>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+                <a href="#">About Amazon</a>
+                <a href="#">Investor Relations</a>
+                <a href="#">Amazon Devices</a>
+                <a href="#">Amazon Science</a>
+            </div>
+            <div class="footer-column">
+                <h3>Make Money with Us</h3>
+                <a href="#">Sell products on Amazon</a>
+                <a href="#">Sell on Amazon Business</a>
+                <a href="#">Sell apps on Amazon</a>
+                <a href="#">Become an Affiliate</a>
+                <a href="#">Advertise Your Products</a>
+                <a href="#">Self-Publish with Us</a>
+            </div>
+            <div class="footer-column">
+                <h3>Amazon Payment Products</h3>
+                <a href="#">Amazon Business Card</a>
+                <a href="#">Shop with Points</a>
+                <a href="#">Reload Your Balance</a>
+                <a href="#">Amazon Currency Converter</a>
+            </div>
+            <div class="footer-column">
+                <h3>Let Us Help You</h3>
+                <a href="#">Amazon and COVID-19</a>
+                <a href="#">Your Account</a>
+                <a href="#">Your Orders</a>
+                <a href="#">Shipping Rates & Policies</a>
+                <a href="#">Returns & Replacements</a>
+                <a href="#">Help</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div style="margin-bottom: var(--space-md);">
+                <a href="#">Conditions of Use</a> &nbsp; | &nbsp;
+                <a href="#">Privacy Notice</a> &nbsp; | &nbsp;
+                <a href="#">Interest-Based Ads</a>
+            </div>
+            <p>&copy; 1996-2026, Amazon.clone, Inc. or its affiliates</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
