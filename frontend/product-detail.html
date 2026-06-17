@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone | Product Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Top Utility Bar -->
+    <nav class="navbar-top">
+        <a href="index.html" class="navbar-logo">amazon<span>.clone</span></a>
+        
+        <form class="navbar-search" id="search-form">
+            <select class="search-select" id="search-category-select">
+                <option value="all">All Departments</option>
+                <option value="electronics">Electronics</option>
+                <option value="fashion">Fashion</option>
+                <option value="smart-home">Smart Home</option>
+                <option value="home-decor">Home Decor</option>
+                <option value="kitchen">Kitchen</option>
+                <option value="books">Books</option>
+            </select>
+            <input type="text" class="search-input" placeholder="Search Amazon" id="search-query">
+            <button type="submit" class="search-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+        </form>
+
+        <div class="navbar-links">
+            <a href="login.html" class="nav-link" id="nav-account">
+                <span class="line-1">Hello, sign in</span>
+                <span class="line-2">Account & Lists</span>
+            </a>
+            <a href="dashboard.html" class="nav-link" id="nav-orders">
+                <span class="line-1">Returns</span>
+                <span class="line-2">& Orders</span>
+            </a>
+            <a href="cart.html" class="nav-link" id="nav-cart" style="position: relative;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span id="cart-count" class="cart-badge">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Secondary Nav Bar -->
+    <div class="navbar-secondary" style="position: relative;">
+        <a href="products.html" id="all-menu-toggle" style="display: flex; align-items: center; gap: 5px; font-weight: bold;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            All
+        </a>
+        <a href="products.html?filter=deals">Today's Deals</a>
+        <a href="#">Customer Service</a>
+        <a href="#">Registry</a>
+        <a href="#">Sell</a>
+        <div style="flex: 1;"></div>
+        <a href="#" style="font-weight: bold;">Shop deals in Electronics</a>
+
+        <!-- Departments Dropdown -->
+        <div class="departments-dropdown" id="departments-dropdown">
+            <a href="products.html?category=electronics">Electronics</a>
+            <a href="products.html?category=fashion">Fashion</a>
+            <a href="products.html?category=smart-home">Smart Home</a>
+            <a href="products.html?category=home-decor">Home Decor</a>
+            <a href="products.html?category=kitchen">Kitchen</a>
+            <a href="products.html?category=books">Books</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumb" id="product-detail-breadcrumb">
+            <a href="index.html">Home</a> &gt; 
+            <a href="products.html" id="breadcrumb-category">Products</a> &gt; 
+            <span id="breadcrumb-product-name">Product Details</span>
+        </div>
+
+        <!-- Product Detail Layout -->
+        <div class="product-detail-container" id="product-container">
+            <!-- 1. Left: Product Images -->
+            <div class="product-images">
+                <div class="main-image-wrapper">
+                    <img src="" alt="Main Product Image" class="main-image" id="detail-main-image">
+                </div>
+                <div class="image-gallery" id="detail-gallery">
+                    <!-- Gallery thumbnails will render here -->
+                </div>
+            </div>
+
+            <!-- 2. Center: Product Info -->
+            <div class="product-info">
+                <h1 id="detail-title">Product Name</h1>
+                <div class="rating-section">
+                    <span class="stars" id="detail-stars">★★★★★</span>
+                    <span id="detail-rating-text" style="color: var(--color-text-link);">4.5 out of 5 stars</span>
+                    <span style="color: var(--color-border);">|</span>
+                    <a href="#reviews-section" style="color: var(--color-text-link);" id="detail-reviews-count">0 reviews</a>
+                </div>
+                
+                <div class="price-section">
+                    <span style="font-size: 0.85rem; color: var(--color-text-secondary);">List Price: <span style="text-decoration: line-through;" id="detail-list-price">$0.00</span></span>
+                    <div class="price" id="detail-price">$0.00</div>
+                    <div>Category: <strong id="detail-category-name" style="text-transform: capitalize;">All</strong></div>
+                    <div style="margin-top: var(--space-sm);">
+                        <p style="font-weight: bold;">About this item:</p>
+                        <p id="detail-description" style="color: var(--color-text-secondary); margin-top: var(--space-xs); font-size: 0.95rem; line-height: 1.6;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Right: Buy / Add to Cart action box -->
+            <div class="action-box">
+                <div class="price" id="detail-action-price">$0.00</div>
+                <div class="stock-status in-stock" id="detail-stock">In Stock</div>
+                
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="detail-qty" style="font-weight: bold; font-size: 0.875rem;">Qty:</label>
+                    <select id="detail-qty" class="quantity-select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                
+                <button class="btn-add-to-cart" id="add-to-cart-btn">Add to Cart</button>
+                <button class="btn-buy-now" id="buy-now-btn">Buy Now</button>
+                
+                <div class="share-section" style="margin-top: var(--space-sm);">
+                    <span>Share:</span>
+                    <a href="#" style="color: var(--color-text-secondary);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                    <a href="#" style="color: var(--color-text-secondary);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <section class="reviews-section" id="reviews-section">
+            <div class="overall-rating">
+                <h2 style="font-size: 1.25rem; font-weight: bold;">Customer Reviews</h2>
+                <div style="display: flex; align-items: center; gap: var(--space-sm); margin-top: var(--space-xs);">
+                    <span class="stars" id="overall-stars" style="font-size: 1.5rem;">★★★★★</span>
+                    <strong id="overall-rating-score" style="font-size: 1.25rem;">4.5 out of 5</strong>
+                </div>
+                <span id="overall-reviews-count-text" style="font-size: 0.9rem; color: var(--color-text-secondary);">247 global ratings</span>
+            </div>
+
+            <div>
+                <h3 style="font-size: 1.15rem; font-weight: bold; margin-bottom: var(--space-md);">Top reviews from the United States</h3>
+                <div class="reviews-list" id="reviews-list">
+                    <!-- Reviews list dynamically loaded -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <button class="back-to-top" id="back-to-top">Back to top</button>
+        <div class="footer-links">
+            <div class="footer-column">
+                <h3>Get to Know Us</h3>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+                <a href="#">About Amazon</a>
+                <a href="#">Investor Relations</a>
+                <a href="#">Amazon Devices</a>
+                <a href="#">Amazon Science</a>
+            </div>
+            <div class="footer-column">
+                <h3>Make Money with Us</h3>
+                <a href="#">Sell products on Amazon</a>
+                <a href="#">Sell on Amazon Business</a>
+                <a href="#">Sell apps on Amazon</a>
+                <a href="#">Become an Affiliate</a>
+                <a href="#">Advertise Your Products</a>
+                <a href="#">Self-Publish with Us</a>
+            </div>
+            <div class="footer-column">
+                <h3>Amazon Payment Products</h3>
+                <a href="#">Amazon Business Card</a>
+                <a href="#">Shop with Points</a>
+                <a href="#">Reload Your Balance</a>
+                <a href="#">Amazon Currency Converter</a>
+            </div>
+            <div class="footer-column">
+                <h3>Let Us Help You</h3>
+                <a href="#">Amazon and COVID-19</a>
+                <a href="#">Your Account</a>
+                <a href="#">Your Orders</a>
+                <a href="#">Shipping Rates & Policies</a>
+                <a href="#">Returns & Replacements</a>
+                <a href="#">Help</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div style="margin-bottom: var(--space-md);">
+                <a href="#">Conditions of Use</a> &nbsp; | &nbsp;
+                <a href="#">Privacy Notice</a> &nbsp; | &nbsp;
+                <a href="#">Interest-Based Ads</a>
+            </div>
+            <p>&copy; 1996-2026, Amazon.clone, Inc. or its affiliates</p>
+        </div>
+    </footer>
+
+    <!-- Javascript Actions -->
+    <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Get product ID from URL query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id') || '1';
+
+            // Find product inside the catalog in main.js
+            const product = window.productsCatalog[productId];
+
+            if (!product) {
+                $('#product-container').html('<p style="grid-column: 1/-1; text-align: center; padding: var(--space-2xl); color: var(--color-text-secondary);">Product not found.</p>');
+                return;
+            }
+
+            // 1. Populate details
+            $('#breadcrumb-category').text(product.category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')).attr('href', `products.html?category=${product.category}`);
+            $('#breadcrumb-product-name').text(product.name);
+            $('#detail-title').text(product.name);
+            $('#detail-description').text(product.description);
+            $('#detail-category-name').text(product.category.replace('-', ' '));
+
+            // Price populating
+            const priceText = `$${parseFloat(product.price).toFixed(2)}`;
+            $('#detail-price').text(priceText);
+            $('#detail-action-price').text(priceText);
+            const listPrice = (product.price * 1.25).toFixed(2);
+            $('#detail-list-price').text(`$${listPrice}`);
+
+            // Stock
+            if (product.stock > 0) {
+                $('#detail-stock').text('In Stock').removeClass('out-of-stock').addClass('in-stock');
+            } else {
+                $('#detail-stock').text('Currently Unavailable').removeClass('in-stock').addClass('out-of-stock');
+                $('#add-to-cart-btn').prop('disabled', true).css('opacity', '0.5');
+                $('#buy-now-btn').prop('disabled', true).css('opacity', '0.5');
+            }
+
+            // Ratings & Reviews count
+            const starsText = '★'.repeat(Math.round(product.rating)) + '☆'.repeat(5 - Math.round(product.rating));
+            $('#detail-stars').text(starsText);
+            $('#detail-rating-text').text(`${product.rating} out of 5 stars`);
+            $('#detail-reviews-count').text(`${product.reviews} reviews`);
+            $('#overall-stars').text(starsText);
+            $('#overall-rating-score').text(`${product.rating} out of 5`);
+            $('#overall-reviews-count-text').text(`${product.reviews} global ratings`);
+
+            // 2. Image Gallery Setup
+            if (product.images && product.images.length > 0) {
+                $('#detail-main-image').attr('src', product.images[0]);
+                
+                const $gallery = $('#detail-gallery');
+                $gallery.empty();
+                product.images.forEach((img, idx) => {
+                    const activeClass = idx === 0 ? 'active' : '';
+                    $gallery.append(`<img src="${img}" alt="Thumbnail" class="thumbnail ${activeClass}" data-src="${img}">`);
+                });
+            }
+
+            // Thumbnail click triggers switching
+            $(document).on('click', '.thumbnail', function() {
+                $('.thumbnail').removeClass('active');
+                $(this).addClass('active');
+                $('#detail-main-image').attr('src', $(this).data('src'));
+            });
+
+            // 3. Render Reviews
+            const $reviewsList = $('#reviews-list');
+            $reviewsList.empty();
+            if (product.reviews_data && product.reviews_data.length > 0) {
+                product.reviews_data.forEach(review => {
+                    const reviewStars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                    const reviewHtml = `
+                        <div class="review-item">
+                            <div class="review-author">${review.author}</div>
+                            <div class="review-stars" style="color: var(--color-primary);">${reviewStars}</div>
+                            <p style="font-size: 0.95rem; margin-top: var(--space-xs);">${review.text}</p>
+                            <div class="review-helpful">
+                                <span>${review.helpful} people found this helpful</span>
+                                <button class="helpful-btn">Helpful</button>
+                            </div>
+                        </div>
+                    `;
+                    $reviewsList.append(reviewHtml);
+                });
+            } else {
+                $reviewsList.html('<p style="color: var(--color-text-secondary);">No customer reviews available yet.</p>');
+            }
+
+            // Helpful button toggle click count simulator
+            $(document).on('click', '.helpful-btn', function() {
+                const $parent = $(this).parent();
+                const $span = $parent.find('span');
+                const text = $span.text();
+                const match = text.match(/^(\d+)/);
+                if (match) {
+                    let count = parseInt(match[1], 10);
+                    if (!$(this).hasClass('clicked')) {
+                        $(this).addClass('clicked').css('background', '#E7F4E7').text('Helpful ✓');
+                        $span.text(`${count + 1} people found this helpful`);
+                    } else {
+                        $(this).removeClass('clicked').css('background', '').text('Helpful');
+                        $span.text(`${count - 1} people found this helpful`);
+                    }
+                }
+            });
+
+            // 4. Add to Cart Button Action
+            $('#add-to-cart-btn').on('click', function(e) {
+                e.preventDefault();
+                const qty = parseInt($('#detail-qty').val(), 10);
+                
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const existing = cart.find(item => item.id === productId);
+                if (existing) {
+                    existing.quantity += qty;
+                } else {
+                    cart.push({
+                        id: productId,
+                        name: product.name,
+                        price: product.price,
+                        image: product.images[0],
+                        quantity: qty
+                    });
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                window.updateCartCount();
+
+                // Success response animation
+                const $btn = $(this);
+                const origText = $btn.text();
+                $btn.text('Added to Cart!').css('background', 'var(--color-success)').prop('disabled', true);
+                setTimeout(() => {
+                    $btn.text(origText).css('background', '').prop('disabled', false);
+                }, 2000);
+            });
+
+            // Buy Now button action simulator
+            $('#buy-now-btn').on('click', function(e) {
+                e.preventDefault();
+                // Store quantity in temp cart
+                const qty = parseInt($('#detail-qty').val(), 10);
+                let cart = [{
+                    id: productId,
+                    name: product.name,
+                    price: product.price,
+                    image: product.images[0],
+                    quantity: qty
+                }];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                window.location.href = 'checkout.html';
+            });
+        });
+    </script>
+</body>
+</html>

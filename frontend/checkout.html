@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone | Checkout</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-xl);
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+            align-items: start;
+        }
+        .checkout-section {
+            background: var(--color-surface);
+            padding: var(--space-xl);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-card);
+            margin-bottom: var(--space-lg);
+        }
+        .checkout-section h2 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: var(--space-md);
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: var(--space-xs);
+        }
+        .order-summary-box {
+            background: var(--color-surface);
+            padding: var(--space-xl);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        .summary-total {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #B12704;
+            border-top: 1px solid var(--color-border);
+            padding-top: var(--space-sm);
+        }
+        @media (max-width: 900px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Utility Bar -->
+    <nav class="navbar-top">
+        <a href="index.html" class="navbar-logo">amazon<span>.clone</span></a>
+        
+        <form class="navbar-search" id="search-form">
+            <select class="search-select" id="search-category-select">
+                <option value="all">All Departments</option>
+                <option value="electronics">Electronics</option>
+                <option value="fashion">Fashion</option>
+                <option value="smart-home">Smart Home</option>
+                <option value="home-decor">Home Decor</option>
+                <option value="kitchen">Kitchen</option>
+                <option value="books">Books</option>
+            </select>
+            <input type="text" class="search-input" placeholder="Search Amazon" id="search-query">
+            <button type="submit" class="search-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+        </form>
+
+        <div class="navbar-links">
+            <a href="login.html" class="nav-link" id="nav-account">
+                <span class="line-1">Hello, sign in</span>
+                <span class="line-2">Account & Lists</span>
+            </a>
+            <a href="dashboard.html" class="nav-link" id="nav-orders">
+                <span class="line-1">Returns</span>
+                <span class="line-2">& Orders</span>
+            </a>
+            <a href="cart.html" class="nav-link" id="nav-cart" style="position: relative;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span id="cart-count" class="cart-badge">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Secondary Nav Bar -->
+    <div class="navbar-secondary" style="position: relative;">
+        <a href="products.html" id="all-menu-toggle" style="display: flex; align-items: center; gap: 5px; font-weight: bold;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            All
+        </a>
+        <a href="products.html?filter=deals">Today's Deals</a>
+        <a href="#">Customer Service</a>
+        <a href="#">Registry</a>
+        <a href="#">Sell</a>
+        <div style="flex: 1;"></div>
+        <a href="#" style="font-weight: bold;">Shop deals in Electronics</a>
+
+        <!-- Departments Dropdown -->
+        <div class="departments-dropdown" id="departments-dropdown">
+            <a href="products.html?category=electronics">Electronics</a>
+            <a href="products.html?category=fashion">Fashion</a>
+            <a href="products.html?category=smart-home">Smart Home</a>
+            <a href="products.html?category=home-decor">Home Decor</a>
+            <a href="products.html?category=kitchen">Kitchen</a>
+            <a href="products.html?category=books">Books</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="checkout-container">
+            <!-- Left Side: Forms -->
+            <div>
+                <form id="checkout-form">
+                    <!-- 1. Shipping Section -->
+                    <div class="checkout-section">
+                        <h2>1. Shipping Address</h2>
+                        <div class="form-group">
+                            <label for="ship-name">Full name (First and Last name)</label>
+                            <input type="text" id="ship-name" class="form-input" required value="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="ship-address">Address Line 1</label>
+                            <input type="text" id="ship-address" class="form-input" placeholder="Street address, P.O. box, company name, c/o" required value="123 Amazon Way">
+                        </div>
+                        <div class="form-group">
+                            <label for="ship-address2">Address Line 2 (Optional)</label>
+                            <input type="text" id="ship-address2" class="form-input" placeholder="Apartment, suite, unit, building, floor, etc.">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ship-city">City</label>
+                                <input type="text" id="ship-city" class="form-input" required value="Seattle">
+                            </div>
+                            <div class="form-group">
+                                <label for="ship-state">State / Province / Region</label>
+                                <input type="text" id="ship-state" class="form-input" required value="WA">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ship-zip">Zip Code</label>
+                                <input type="text" id="ship-zip" class="form-input" required value="98101">
+                            </div>
+                            <div class="form-group">
+                                <label for="ship-phone">Phone number</label>
+                                <input type="text" id="ship-phone" class="form-input" required value="206-555-0199">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Payment Section -->
+                    <div class="checkout-section">
+                        <h2>2. Payment Method</h2>
+                        <div class="form-group">
+                            <label for="card-name">Name on card</label>
+                            <input type="text" id="card-name" class="form-input" required value="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="card-number">Card number</label>
+                            <input type="text" id="card-number" class="form-input" placeholder="xxxx-xxxx-xxxx-xxxx" required value="4111 2222 3333 4444">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-exp">Expiration Date</label>
+                                <input type="text" id="card-exp" class="form-input" placeholder="MM/YY" required value="12/28">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-cvv">Security Code (CVV)</label>
+                                <input type="password" id="card-cvv" class="form-input" placeholder="***" required value="123">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Side: Order summary -->
+            <div class="order-summary-box">
+                <h3 style="font-size: 1.2rem; font-weight: bold; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-xs);">Order Summary</h3>
+                
+                <div id="checkout-items" style="display: flex; flex-direction: column; gap: var(--space-xs); max-height: 200px; overflow-y: auto;">
+                    <!-- Render cart items -->
+                </div>
+
+                <hr style="border: 0; border-top: 1px dashed var(--color-border);">
+
+                <div class="summary-row">
+                    <span>Items:</span>
+                    <span id="summary-items-cost">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping & handling:</span>
+                    <span id="summary-shipping-cost">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax (10%):</span>
+                    <span id="summary-tax-cost">$0.00</span>
+                </div>
+                <div class="summary-total summary-row">
+                    <span>Order Total:</span>
+                    <span id="summary-total-cost">$0.00</span>
+                </div>
+
+                <button class="btn-primary" id="place-order-btn" style="width: 100%; border-radius: 100px; padding: var(--space-md); font-weight: bold;">Place your order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <button class="back-to-top" id="back-to-top">Back to top</button>
+        <div class="footer-links">
+            <div class="footer-column">
+                <h3>Get to Know Us</h3>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+                <a href="#">About Amazon</a>
+                <a href="#">Investor Relations</a>
+                <a href="#">Amazon Devices</a>
+                <a href="#">Amazon Science</a>
+            </div>
+            <div class="footer-column">
+                <h3>Make Money with Us</h3>
+                <a href="#">Sell products on Amazon</a>
+                <a href="#">Sell on Amazon Business</a>
+                <a href="#">Sell apps on Amazon</a>
+                <a href="#">Become an Affiliate</a>
+                <a href="#">Advertise Your Products</a>
+                <a href="#">Self-Publish with Us</a>
+            </div>
+            <div class="footer-column">
+                <h3>Amazon Payment Products</h3>
+                <a href="#">Amazon Business Card</a>
+                <a href="#">Shop with Points</a>
+                <a href="#">Reload Your Balance</a>
+                <a href="#">Amazon Currency Converter</a>
+            </div>
+            <div class="footer-column">
+                <h3>Let Us Help You</h3>
+                <a href="#">Amazon and COVID-19</a>
+                <a href="#">Your Account</a>
+                <a href="#">Your Orders</a>
+                <a href="#">Shipping Rates & Policies</a>
+                <a href="#">Returns & Replacements</a>
+                <a href="#">Help</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div style="margin-bottom: var(--space-md);">
+                <a href="#">Conditions of Use</a> &nbsp; | &nbsp;
+                <a href="#">Privacy Notice</a> &nbsp; | &nbsp;
+                <a href="#">Interest-Based Ads</a>
+            </div>
+            <p>&copy; 1996-2026, Amazon.clone, Inc. or its affiliates</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('Your cart is empty. Redirecting to Homepage...');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            renderOrderSummary();
+
+            function renderOrderSummary() {
+                const $itemsBox = $('#checkout-items');
+                $itemsBox.empty();
+
+                let subtotal = 0;
+
+                cart.forEach(item => {
+                    const price = parseFloat(item.price);
+                    const qty = parseInt(item.quantity, 10);
+                    subtotal += price * qty;
+
+                    $itemsBox.append(`
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                            <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">${item.name} (x${qty})</span>
+                            <span>$${(price * qty).toFixed(2)}</span>
+                        </div>
+                    `);
+                });
+
+                const shipping = subtotal > 150 ? 0 : 9.99;
+                const tax = subtotal * 0.10;
+                const total = subtotal + shipping + tax;
+
+                $('#summary-items-cost').text(`$${subtotal.toFixed(2)}`);
+                $('#summary-shipping-cost').text(shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`);
+                $('#summary-tax-cost').text(`$${tax.toFixed(2)}`);
+                $('#summary-total-cost').text(`$${total.toFixed(2)}`);
+            }
+
+            // Place Order Handler
+            $('#place-order-btn').on('click', function(e) {
+                e.preventDefault();
+                
+                // Form validation check
+                const form = document.getElementById('checkout-form');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // Simulate order creation
+                const orderId = '#AMZ-' + Math.floor(10000 + Math.random() * 90000);
+                const orderDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                
+                const itemsListNames = cart.map(item => `${item.name} (x${item.quantity})`).join(', ');
+                const totalCost = $('#summary-total-cost').text();
+
+                // Mock new order insertion into localStorage
+                let mockOrders = JSON.parse(localStorage.getItem('mockOrders')) || [];
+                mockOrders.unshift({
+                    id: orderId,
+                    date: orderDate,
+                    items: itemsListNames,
+                    total: totalCost,
+                    status: 'Processing'
+                });
+                localStorage.setItem('mockOrders', JSON.stringify(mockOrders));
+
+                // Clear cart
+                localStorage.removeItem('cart');
+                window.updateCartCount();
+
+                // Show success feedback
+                const $box = $('.order-summary-box');
+                $box.html(`
+                    <div style="text-align: center; color: var(--color-success); padding: var(--space-xl) 0;">
+                        <h2 style="font-size: 1.5rem; margin-bottom: var(--space-md);">Order Successful!</h2>
+                        <p style="font-size: 0.95rem; color: var(--color-text-secondary); margin-bottom: var(--space-lg);">Thank you for your purchase. Your order number is <strong>${orderId}</strong>.</p>
+                        <a href="dashboard.html" class="btn-primary" style="display: block; text-align: center; border-radius: 100px; padding: var(--space-md);">View Your Orders</a>
+                    </div>
+                `);
+            });
+        });
+    </script>
+</body>
+</html>

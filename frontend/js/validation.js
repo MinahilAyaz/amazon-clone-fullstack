@@ -38,8 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (isValid) {
-                console.log('Login successful, redirecting...');
-                window.location.href = 'dashboard.html';
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                // Add a default user if users is empty so the login works out of the box
+                if (users.length === 0) {
+                    users.push({ name: 'John Doe', email: 'john@example.com', password: 'password123' });
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+                
+                const user = users.find(u => u.email === email && u.password === password);
+                if (user) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    console.log('Login successful, redirecting...');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    toggleError('password-error', true, 'Invalid email or password');
+                }
             }
         });
     }
@@ -85,6 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (isValid) {
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                // Check if user already exists
+                const existing = users.find(u => u.email === email);
+                if (existing) {
+                    toggleError('reg-email-error', true, 'Email already registered');
+                    return;
+                }
+                
+                users.push({ name: name, email: email, password: password });
+                localStorage.setItem('users', JSON.stringify(users));
+                
                 console.log('Registration successful, redirecting to login...');
                 window.location.href = 'login.html';
             }
